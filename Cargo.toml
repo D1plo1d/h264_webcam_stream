@@ -9,6 +9,10 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 jpeg-decoder = "0.3.0"
 openh264 = { version = "0.3.0", default-features = false, features = ["encoder", "decoder"] }
-v4l = { git = "https://github.com/raymanfx/libv4l-rs.git", branch="next"}
+v4l = "0.13.1"
 tracing = "0.1.37"
 thiserror = "1.0.37"
+
+[dev-dependencies]
+chrono = "0.4.23"
+eyre = "0.6.8"

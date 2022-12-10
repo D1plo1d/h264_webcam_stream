@@ -9,20 +9,22 @@ Video devices that only support mjpeg are re-encoded as h264 by the openh264 lib
 Streaming an h264 file to video is simple:
 
 ```rust
-fn main {
+fn main() -> Result<()> {
     let device_path = Path::new("/dev/video0");
     let max_fps = 60;
 
     let mut device = h264_webcam_stream::get_device(&device_path)?;
     let mut stream = h264_webcam_stream::stream(&mut device, max_fps)?;
 
-    let mut file = std::fs::File::create("./test.h264")?;
+    let mut f = std::fs::File::create("./test.h264")?;
 
-    for 0...120 {
+    for _ in 0..120 {
         let (h264_bytes, _) = stream.next(false)?;
         // Record the h264 video to a file
         f.write_all(&h264_bytes[..])?;
     }
+
+    Ok(())
 }
 ```
 
@@ -34,6 +36,8 @@ Getting a list of the video capture devices is also easy:
 let devices: Vec<_> = h264_webcam_stream::list_devices()
     .into_iter()
     .collect();
+
+println!("Video devices: {:?}", devices);
 ```
 
 ### Capturing Still Images
