@@ -20,7 +20,7 @@ fn main {
 
     for 0...120 {
         let (h264_bytes, _) = stream.next(false)?;
-        // Write the timelapse h264 output to file
+        // Record the h264 video to a file
         f.write_all(&h264_bytes[..])?;
     }
 }
